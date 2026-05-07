@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="g" x1="20" y1="14" x2="102" y2="106" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a78bfa"/>
+      <stop offset=".52" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <radialGradient id="h" cx="0" cy="0" r="1" gradientTransform="translate(38 28) rotate(54) scale(92)">
+      <stop stop-color="#fff" stop-opacity=".52"/>
+      <stop offset=".38" stop-color="#fff" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="#050509"/>
+  <circle cx="60" cy="60" r="54" fill="url(#g)"/>
+  <circle cx="60" cy="60" r="54" fill="url(#h)"/>
+  <circle cx="60" cy="60" r="46.5" fill="#08080d"/>
+  <circle cx="60" cy="60" r="43.5" fill="none" stroke="#fff" stroke-opacity=".11"/>
+  <text x="60" y="75" text-anchor="middle" fill="#f7f3ea" font-family="Cormorant Garamond, Georgia, Times New Roman, serif" font-size="52" font-weight="700" letter-spacing="-3">EL</text>
+</svg>
