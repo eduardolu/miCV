@@ -18,10 +18,9 @@ export default function Projects() {
           <div className="project-content">
             <div className="project-meta">
               <span>Aplicación web</span>
-              <span>Cloudflare Pages</span>
             </div>
 
-            <h3>Meteo Eduardo Lu</h3>
+            <h3>Meteo</h3>
             <p>
               App meteorológica publicada en meteo.eduardolu.com con una vista moderna para consultar
               el tiempo, previsiones y datos clave de forma clara y rápida.
@@ -62,7 +61,7 @@ export default function Projects() {
               <span>Productividad</span>
             </div>
 
-            <h3>Notas Eduardo Lu</h3>
+            <h3>Notas</h3>
             <p>
               App de notas publicada en nota.eduardolu.com para crear, organizar y consultar apuntes
               de forma sencilla, rápida y enfocada en la productividad diaria.
@@ -73,6 +72,7 @@ export default function Projects() {
               <span>TypeScript</span>
               <span>Vite</span>
               <span>Cloudflare</span>
+              <span>Firebase</span>
             </div>
 
             <a className="project-link" href="https://nota.eduardolu.com" target="_blank" rel="noreferrer">
