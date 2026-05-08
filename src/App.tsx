@@ -15,12 +15,15 @@ function App() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-      const progress = Math.min(scrollY / (windowHeight * 1.1), 1);
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const progressDistance = windowHeight * (isMobile ? 0.72 : 1.1);
+      const progress = Math.min(scrollY / progressDistance, 1);
       
       setHeroScrollProgress(progress);
-      setHeaderVisible(scrollY > windowHeight * 0.5);
+      setHeaderVisible(scrollY > windowHeight * (isMobile ? 0.26 : 0.5));
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -43,14 +46,14 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  const doorsOpen = heroScrollProgress > 0.4;
+  const doorsOpen = heroScrollProgress > 0.26;
 
   return (
     <>
       <Header visible={headerVisible} />
       <Hero scrollProgress={heroScrollProgress} />
 
-      <main style={{ opacity: doorsOpen ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+      <main className={`page-content ${doorsOpen ? 'page-content-visible' : ''}`}>
         <section className="section" id="datos">
           <PersonalData />
         </section>
@@ -65,7 +68,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="footer">
+      <footer className={`footer ${doorsOpen ? 'footer-visible' : ''}`}>
         <p>© 2026 Eduardo Lu. Hecho con React + TypeScript.</p>
       </footer>
     </>

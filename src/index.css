@@ -275,6 +275,20 @@ body {
   background-position: 100% 50%;
 }
 
+.page-content {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease, visibility 0s linear 0.55s;
+}
+
+.page-content-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
 /* Header */
 .header {
   position: fixed;
@@ -1090,6 +1104,15 @@ body {
   font-size: 14px;
   border-top: 1px solid var(--border);
   background: var(--bg-surface);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+}
+
+.footer-visible {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
 }
 
 .footer p {
@@ -1108,6 +1131,14 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .hero {
+    height: 104svh;
+  }
+
+  .hero-content {
+    height: 100svh;
+  }
+
   .logo-single-circle::before {
     content: none;
   }
@@ -1131,7 +1162,7 @@ body {
   }
 
   .section {
-    padding: 80px 20px;
+    padding: 64px 20px;
   }
 
   .section-title {
