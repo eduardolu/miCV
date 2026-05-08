@@ -6,6 +6,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -1123,31 +1124,6 @@ body {
 }
 
 /* Technical Toolkit */
-.toolkit-heading {
-  display: flex;
-  align-items: baseline;
-  gap: 22px;
-  margin-bottom: 52px;
-}
-
-.toolkit-index {
-  color: var(--primary);
-  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: clamp(34px, 5vw, 56px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0;
-}
-
-.toolkit-title {
-  color: var(--text);
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(34px, 5vw, 56px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-
 .toolkit-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1409,11 +1385,6 @@ body {
     min-height: 210px;
   }
 
-  .toolkit-heading {
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-
   .toolkit-grid {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -1501,16 +1472,6 @@ body {
   .project-cloud-main {
     left: 26px;
     width: 132px;
-  }
-
-  .toolkit-heading {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .toolkit-title,
-  .toolkit-index {
-    font-size: 34px;
   }
 
   .toolkit-card {
