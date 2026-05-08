@@ -5,11 +5,22 @@ import Hero from './components/Hero';
 import PersonalData from './components/PersonalData';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import TechnicalToolkit from './components/TechnicalToolkit';
 import News from './components/News';
 
 function App() {
   const [headerVisible, setHeaderVisible] = useState(false);
   const [heroScrollProgress, setHeroScrollProgress] = useState(0);
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || storedTheme === 'light') return storedTheme;
+    return 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,10 +58,11 @@ function App() {
   }, []);
 
   const doorsOpen = heroScrollProgress > 0.26;
+  const toggleTheme = () => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'));
 
   return (
     <>
-      <Header visible={headerVisible} />
+      <Header visible={headerVisible} theme={theme} onToggleTheme={toggleTheme} />
       <Hero scrollProgress={heroScrollProgress} />
 
       <main className={`page-content ${doorsOpen ? 'page-content-visible' : ''}`}>
@@ -62,6 +74,9 @@ function App() {
         </section>
         <section className="section" id="proyectos">
           <Projects />
+        </section>
+        <section className="section section-wide" id="toolkit">
+          <TechnicalToolkit />
         </section>
         <section className="section" id="noticias">
           <News />
