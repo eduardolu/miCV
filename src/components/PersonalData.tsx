@@ -12,11 +12,11 @@ export default function PersonalData() {
         </div>
         <div className="personal-info">
           <h3>Eduardo Lu</h3>
-          <p className="role">Full Stack Developer</p>
+          <p className="role">Full Stack Developer | 42 Madrid</p>
           <p className="bio">
-            Desarrollador Full Stack con 2 años de experiencia creando aplicaciones web modernas y escalables.
-            Apasionado por la tecnología, el aprendizaje continuo y la resolución de problemas complejos.
-            Basado en Madrid, siempre en busca de nuevos desafíos y oportunidades para crecer profesionalmente.
+            Desarrollador Full Stack en Madrid, formado en 42 y con experiencia creando aplicaciones web
+            modernas con React, TypeScript y herramientas del ecosistema JavaScript. Combino una base técnica
+            práctica con experiencia previa en operaciones, coordinación de proyectos y resolución de problemas.
           </p>
           <div className="info-grid">
             <div className="info-item">
@@ -26,19 +26,36 @@ export default function PersonalData() {
               </svg>
               <span>Madrid, España</span>
             </div>
-            <div className="info-item">
+            <a className="info-item" href="https://www.linkedin.com/in/edulu/" target="_blank" rel="noreferrer">
               <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
               </svg>
-              <span>eduardo.lu...</span>
-            </div>
+              <span>LinkedIn / edulu</span>
+            </a>
             <div className="info-item">
               <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
                 <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
               </svg>
               <span>2 años de experiencia</span>
+            </div>
+            <div className="info-item">
+              <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 10L12 5 2 10l10 5 10-5z" />
+                <path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" />
+              </svg>
+              <span>42 Madrid · 2023 - 2025</span>
+            </div>
+            <div className="info-item">
+              <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20" />
+                <path d="M12 2a15.3 15.3 0 010 20" />
+                <path d="M12 2a15.3 15.3 0 000 20" />
+              </svg>
+              <span>Español y chino bilingüe</span>
             </div>
           </div>
         </div>

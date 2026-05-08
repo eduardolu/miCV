@@ -17,17 +17,17 @@ export default function Projects() {
 
           <div className="project-content">
             <div className="project-meta">
-              <span>Aplicacion web</span>
+              <span>Aplicación web</span>
               <span>Cloudflare Pages</span>
             </div>
 
             <h3>Meteo Eduardo Lu</h3>
             <p>
-              App meteorologica publicada en meteo.eduardolu.com con una vista moderna para consultar
-              el tiempo, previsiones y datos clave de forma clara y rapida.
+              App meteorológica publicada en meteo.eduardolu.com con una vista moderna para consultar
+              el tiempo, previsiones y datos clave de forma clara y rápida.
             </p>
 
-            <div className="project-tags" aria-label="Tecnologias del proyecto">
+            <div className="project-tags" aria-label="Tecnologías del proyecto">
               <span>React</span>
               <span>TypeScript</span>
               <span>Vite</span>
