@@ -84,6 +84,48 @@ export default function Projects() {
             </a>
           </div>
         </article>
+
+        <article className="project-card featured-project project-card-heroes">
+          <div className="project-visual project-visual-heroes" aria-hidden="true">
+            <span className="hero-panel hero-panel-back" />
+            <span className="hero-panel hero-panel-front">
+              <span className="hero-mask" />
+              <span className="hero-emblem" />
+              <span className="hero-cape" />
+            </span>
+            <span className="hero-burst hero-burst-one" />
+            <span className="hero-burst hero-burst-two" />
+          </div>
+
+          <div className="project-content">
+            <div className="project-meta">
+              <span>Aplicación web</span>
+              <span>Entretenimiento</span>
+            </div>
+
+            <h3>Héroes</h3>
+            <p>
+              App publicada en heroe.eduardolu.com para explorar héroes de Marvel y DC con una interfaz
+              visual, rápida y pensada para consultar personajes y detalles de forma sencilla.
+            </p>
+
+            <div className="project-tags" aria-label="Tecnologías del proyecto">
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>Vite</span>
+              <span>Cloudflare</span>
+              <span>API</span>
+            </div>
+
+            <a className="project-link" href="https://heroe.eduardolu.com" target="_blank" rel="noreferrer">
+              Ver proyecto
+              <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M7 17 17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+            </a>
+          </div>
+        </article>
       </div>
     </>
   );
