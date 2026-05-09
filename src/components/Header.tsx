@@ -105,7 +105,7 @@ export default function Header({ visible, theme, onToggleTheme }: HeaderProps) {
               )}
             </button>
 
-            <a href="mailto:eduardo.luzhan@gmail.com" className="header-cta">
+            <a href="mailto:e.lu@eduardolu.com" className="header-cta">
               Contacto
             </a>
           </div>
