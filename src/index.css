@@ -1435,7 +1435,7 @@ body {
   }
 
   .logo-single-circle {
-    width: min(420px, 86vw);
+    width: min(540px, 118vw);
   }
 
   .header-inner {
@@ -1572,7 +1572,7 @@ body {
   }
 
   .logo-single-circle {
-    width: min(340px, 88vw);
+    width: min(500px, 128vw);
   }
 
   .door-logo-half {
