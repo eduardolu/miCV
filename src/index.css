@@ -1436,16 +1436,6 @@ body {
 
   .logo-single-circle {
     width: min(540px, 118vw);
-    filter:
-      drop-shadow(0 18px 34px rgba(0, 0, 0, 0.46))
-      drop-shadow(0 0 36px rgba(0, 229, 255, 0.22));
-    transform: translateZ(0);
-  }
-
-  .hero-logo-half,
-  .door-logo-half {
-    backface-visibility: hidden;
-    transform: translateZ(0);
   }
 
   .header-inner {
