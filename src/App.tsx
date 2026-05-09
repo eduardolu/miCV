@@ -23,20 +23,46 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frameId: number | null = null;
+    let lastProgress = -1;
+    let lastHeaderVisible = false;
+
+    const updateScrollState = () => {
+      frameId = null;
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const progressDistance = windowHeight * (isMobile ? 0.72 : 1.1);
       const progress = Math.min(scrollY / progressDistance, 1);
-      
-      setHeroScrollProgress(progress);
-      setHeaderVisible(scrollY > windowHeight * (isMobile ? 0.26 : 0.5));
+      const nextHeaderVisible = scrollY > windowHeight * (isMobile ? 0.26 : 0.5);
+
+      if (Math.abs(progress - lastProgress) > 0.003) {
+        lastProgress = progress;
+        setHeroScrollProgress(progress);
+      }
+
+      if (nextHeaderVisible !== lastHeaderVisible) {
+        lastHeaderVisible = nextHeaderVisible;
+        setHeaderVisible(nextHeaderVisible);
+      }
     };
 
-    handleScroll();
+    const handleScroll = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateScrollState);
+    };
+
+    updateScrollState();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, []);
 
   useEffect(() => {
