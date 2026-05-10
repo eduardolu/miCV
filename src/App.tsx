@@ -23,7 +23,10 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frameId: number | null = null;
+
+    const updateScrollState = () => {
+      frameId = null;
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -34,9 +37,24 @@ function App() {
       setHeaderVisible(scrollY > windowHeight * (isMobile ? 0.26 : 0.5));
     };
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const scheduleScrollUpdate = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateScrollState);
+    };
+
+    updateScrollState();
+    window.addEventListener('scroll', scheduleScrollUpdate, { passive: true });
+    window.addEventListener('touchmove', scheduleScrollUpdate, { passive: true });
+    window.addEventListener('resize', scheduleScrollUpdate);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleScrollUpdate);
+      window.removeEventListener('touchmove', scheduleScrollUpdate);
+      window.removeEventListener('resize', scheduleScrollUpdate);
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, []);
 
   useEffect(() => {
