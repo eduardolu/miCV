@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 interface HeroProps {
-  scrollProgress: number;
+  doorsOpen: boolean;
 }
 
 const particles = [
@@ -19,15 +19,8 @@ const particles = [
   { left: 91, top: 26, delay: 3.1, duration: 7.9 },
 ];
 
-export default function Hero({ scrollProgress }: HeroProps) {
+export default function Hero({ doorsOpen }: HeroProps) {
   const [hovered, setHovered] = useState(false);
-
-  const splitAmount = scrollProgress * 190;
-  const rotateAmount = scrollProgress * 4;
-  const opacity = Math.max(0, 1 - scrollProgress * 1.5);
-  const scale = 1 - scrollProgress * 0.15;
-
-  const doorsOpen = scrollProgress > 0.4;
 
   return (
     <section className={`hero ${doorsOpen ? 'splitting' : ''}`}>
@@ -38,6 +31,7 @@ export default function Hero({ scrollProgress }: HeroProps) {
       </div>
 
       <div className="hero-content">
+        <h1 className="sr-only">Eduardo Lu - Full Stack Developer en Madrid</h1>
         <div className="hero-particles">
           {particles.map((particle, i) => (
             <div 
@@ -55,10 +49,6 @@ export default function Hero({ scrollProgress }: HeroProps) {
 
         <div 
           className="logo-container"
-          style={{ 
-            opacity,
-            transform: `scale(${scale})`,
-          }}
         >
           <div 
             className="logo-single-circle"
@@ -70,27 +60,19 @@ export default function Hero({ scrollProgress }: HeroProps) {
           >
             <div
               className="hero-logo-half hero-logo-half-left"
-              style={{
-                transform: `translateX(-${splitAmount}px) rotate(${-rotateAmount}deg)`,
-              }}
             />
             <div
               className="hero-logo-half hero-logo-half-right"
-              style={{
-                transform: `translateX(${splitAmount}px) rotate(${rotateAmount}deg)`,
-              }}
             />
           </div>
         </div>
 
-        {scrollProgress < 0.1 && (
-          <div className="scroll-hint">
-            <span>Scroll para entrar</span>
-            <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-            </svg>
-          </div>
-        )}
+        <div className="scroll-hint">
+          <span>Scroll para entrar</span>
+          <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+          </svg>
+        </div>
       </div>
 
       <div className={`door-left ${doorsOpen ? 'open' : ''}`}>

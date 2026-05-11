@@ -10,7 +10,7 @@ import News from './components/News';
 
 function App() {
   const [headerVisible, setHeaderVisible] = useState(false);
-  const [heroScrollProgress, setHeroScrollProgress] = useState(0);
+  const [doorsOpen, setDoorsOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme === 'dark' || storedTheme === 'light') return storedTheme;
@@ -24,33 +24,46 @@ function App() {
 
   useEffect(() => {
     let frameId: number | null = null;
+    let lastHeaderVisible = false;
+    let lastDoorsOpen = false;
 
-    const updateScrollState = () => {
+    const updateHeroProgress = () => {
       frameId = null;
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const progressDistance = windowHeight * (isMobile ? 0.72 : 1.1);
       const progress = Math.min(scrollY / progressDistance, 1);
-      
-      setHeroScrollProgress(progress);
-      setHeaderVisible(scrollY > windowHeight * (isMobile ? 0.26 : 0.5));
+      const nextHeaderVisible = scrollY > windowHeight * (isMobile ? 0.26 : 0.5);
+      const nextDoorsOpen = progress > 0.26;
+
+      document.documentElement.style.setProperty('--hero-progress', progress.toFixed(4));
+
+      if (nextHeaderVisible !== lastHeaderVisible) {
+        lastHeaderVisible = nextHeaderVisible;
+        setHeaderVisible(nextHeaderVisible);
+      }
+
+      if (nextDoorsOpen !== lastDoorsOpen) {
+        lastDoorsOpen = nextDoorsOpen;
+        setDoorsOpen(nextDoorsOpen);
+      }
     };
 
-    const scheduleScrollUpdate = () => {
+    const scheduleHeroProgress = () => {
       if (frameId !== null) return;
-      frameId = window.requestAnimationFrame(updateScrollState);
+      frameId = window.requestAnimationFrame(updateHeroProgress);
     };
 
-    updateScrollState();
-    window.addEventListener('scroll', scheduleScrollUpdate, { passive: true });
-    window.addEventListener('touchmove', scheduleScrollUpdate, { passive: true });
-    window.addEventListener('resize', scheduleScrollUpdate);
+    updateHeroProgress();
+    window.addEventListener('scroll', scheduleHeroProgress, { passive: true });
+    window.addEventListener('touchmove', scheduleHeroProgress, { passive: true });
+    window.addEventListener('resize', scheduleHeroProgress);
 
     return () => {
-      window.removeEventListener('scroll', scheduleScrollUpdate);
-      window.removeEventListener('touchmove', scheduleScrollUpdate);
-      window.removeEventListener('resize', scheduleScrollUpdate);
+      window.removeEventListener('scroll', scheduleHeroProgress);
+      window.removeEventListener('touchmove', scheduleHeroProgress);
+      window.removeEventListener('resize', scheduleHeroProgress);
       if (frameId !== null) {
         window.cancelAnimationFrame(frameId);
       }
@@ -75,13 +88,12 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  const doorsOpen = heroScrollProgress > 0.26;
   const toggleTheme = () => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'));
 
   return (
     <>
       <Header visible={headerVisible} theme={theme} onToggleTheme={toggleTheme} />
-      <Hero scrollProgress={heroScrollProgress} />
+      <Hero doorsOpen={doorsOpen} />
 
       <main className={`page-content ${doorsOpen ? 'page-content-visible' : ''}`}>
         <section className="section" id="datos">

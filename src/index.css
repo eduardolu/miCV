@@ -19,8 +19,21 @@ body {
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 :root {
   color-scheme: dark;
+  --hero-progress: 0;
   --primary: #00e5ff;
   --primary-dark: #00a8c5;
   --primary-light: #b8f7ff;
@@ -182,7 +195,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  opacity: max(0, calc(1 - var(--hero-progress) * 1.5));
+  transform: scale(calc(1 - var(--hero-progress) * 0.15));
+  will-change: opacity, transform;
 }
 
 .logo-single-circle {
@@ -207,20 +222,23 @@ body {
   background-image: url('/logo-el.png');
   background-size: 200% 100%;
   background-repeat: no-repeat;
-  transition: transform 0.1s linear;
   will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .hero-logo-half-left {
   left: 0;
   background-position: 0% 50%;
   transform-origin: right center;
+  transform: translateX(calc(var(--hero-progress) * -190px)) rotate(calc(var(--hero-progress) * -4deg));
 }
 
 .hero-logo-half-right {
   right: 0;
   background-position: 100% 50%;
   transform-origin: left center;
+  transform: translateX(calc(var(--hero-progress) * 190px)) rotate(calc(var(--hero-progress) * 4deg));
 }
 
 .scroll-hint {
@@ -237,7 +255,8 @@ body {
   font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  transition: opacity 0.4s ease;
+  opacity: max(0, calc(1 - var(--hero-progress) * 10));
+  pointer-events: none;
 }
 
 .scroll-hint svg {
@@ -1436,14 +1455,6 @@ body {
 
   .logo-single-circle {
     width: min(540px, 118vw);
-    filter:
-      drop-shadow(0 18px 34px rgba(0, 0, 0, 0.46))
-      drop-shadow(0 0 32px rgba(0, 229, 255, 0.22));
-  }
-
-  .hero-logo-half,
-  .door-logo-half {
-    backface-visibility: hidden;
   }
 
   .header-inner {
