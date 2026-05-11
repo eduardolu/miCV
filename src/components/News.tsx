@@ -1,4 +1,5 @@
 interface NewsItem {
+  id: number;
   date: string;
   title: string;
   description: string;
@@ -7,6 +8,7 @@ interface NewsItem {
 
 const news: NewsItem[] = [
   {
+    id: 1,
     date: 'Mayo 2026',
     title: 'React y Next.js refuerzan su seguridad',
     description:
@@ -14,6 +16,7 @@ const news: NewsItem[] = [
     url: 'https://developers.cloudflare.com/changelog/post/2026-05-06-react-nextjs-vulnerabilities/',
   },
   {
+    id: 2,
     date: 'Abril 2026',
     title: 'MDN renueva su frontend',
     description:
@@ -21,6 +24,7 @@ const news: NewsItem[] = [
     url: 'https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/',
   },
   {
+    id: 3,
     date: '2026',
     title: 'Baseline 2026 marca nuevas APIs listas para usar',
     description:
@@ -36,8 +40,8 @@ export default function News() {
       <p className="section-subtitle">Lo último que está pasando</p>
 
       <div className="news-grid">
-        {news.map((item, index) => (
-          <a className="news-card" href={item.url} target="_blank" rel="noreferrer" key={index}>
+        {news.map((item) => (
+          <a className="news-card" href={item.url} target="_blank" rel="noreferrer" key={item.id}>
             <span className="news-date">{item.date}</span>
             <h4>{item.title}</h4>
             <p>{item.description}</p>
