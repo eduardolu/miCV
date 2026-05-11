@@ -17,7 +17,6 @@ interface HeaderProps {
 
 export default function Header({ visible, theme, onToggleTheme }: HeaderProps) {
   const [activeSection, setActiveSection] = useState('');
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,15 +39,34 @@ export default function Header({ visible, theme, onToggleTheme }: HeaderProps) {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frameId: number | null = null;
+
+    const updateProgress = () => {
+      frameId = null;
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setScrollProgress(progress);
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      document.documentElement.style.setProperty('--page-progress', progress.toFixed(4));
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const scheduleProgress = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', scheduleProgress, { passive: true });
+    window.addEventListener('touchmove', scheduleProgress, { passive: true });
+    window.addEventListener('resize', scheduleProgress);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('touchmove', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, []);
 
   const scrollTo = (id: string) => {
@@ -112,7 +130,7 @@ export default function Header({ visible, theme, onToggleTheme }: HeaderProps) {
         </div>
       </header>
 
-      <div className="header-progress" style={{ width: `${scrollProgress}%` }} />
+      <div className="header-progress" />
     </>
   );
 }
