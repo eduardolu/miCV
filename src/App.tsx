@@ -35,7 +35,7 @@ function App() {
       const progressDistance = windowHeight * (isMobile ? 0.72 : 1.1);
       const progress = Math.min(scrollY / progressDistance, 1);
       const nextHeaderVisible = scrollY > windowHeight * (isMobile ? 0.26 : 0.5);
-      const nextDoorsOpen = progress > 0.26;
+      const nextDoorsOpen = isMobile ? scrollY > 12 : progress > 0.26;
 
       document.documentElement.style.setProperty('--hero-progress', progress.toFixed(4));
 
